@@ -36,11 +36,17 @@ public class NotePad extends JFrame {
     //constructor (GUI and controls)
     public NotePad(){
         //super the Jframe (pass title)
-        super("JavaPad");
+        super("JavaPad");//set window text
         //set window size
         setSize(700,500);
         //set window close operation to close app
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+
+        
+        //draw Jframe (test)
+        setVisible(true);
     }
 }
 
