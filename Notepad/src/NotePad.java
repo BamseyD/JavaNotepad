@@ -11,13 +11,13 @@ import java.io.FileWriter;
 
 public class NotePad extends JFrame {
    //attributes
-   private JTextArea m_tTextAreaData; 
-   private File m_file; 
-   private JFileChooser m_fileChooser; 
-   private String m_savedFile;
+   private JTextArea m_tTextAreaData;           //global ref to swing JTextArea object used as main control of app. Allows editing of contents presently loaded txt file
+   private File m_file;                         //global ref of FIle object. a pointer to location where presently load file is.
+   private JFileChooser m_fileChooser;          //global ref filechooser used to browse for file to open or a location to save presently load file
+   private String m_savedFile;                  //global ref to content of last file loaded. used to compare content of JTextArea to before a save to see if changes been made (if save required)
 
    //constants
-   final String DEFAULT_FILENAME = "default.txt";
+   final String DEFAULT_FILENAME = "default.txt";       //adds static ref to the default fileanme the app will set for new files.
 
    //static run method (instantiates the class)
     public static void main(String[] args) throws Exception {
@@ -25,31 +25,31 @@ public class NotePad extends JFrame {
     }
 
     //set many button defaults easily
-    private JButton MakeButton(String toolTip, ImageIcon image){ //declare method
-        JButton btn = new JButton(image); //declare new JButton setting
-        btn.setBorder(BorderFactory.createEmptyBorder()); //off default border and background
+    private JButton MakeButton(String toolTip, ImageIcon image){                            //declare method
+        JButton btn = new JButton(image);                                                   //declare new JButton setting
+        btn.setBorder(BorderFactory.createEmptyBorder());                                   //off default border and background
         btn.setContentAreaFilled(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
-        btn.setToolTipText(toolTip); ////accessabilty feature
-        return btn; //returns the button to code that calls this method
+        btn.setToolTipText(toolTip);                                                        //accessabilty feature
+        return btn;                                                                         //returns the button to code that calls this method
     }
 
     //constructor (GUI and controls)
     public NotePad(){
         //super the Jframe (pass title)
-        super("JavaPad");//set window text
+        super("JavaPad");                                       //set window text
         //set window size
         setSize(700,500);
         //set window close operation to close app
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         //make menu
-        JMenuBar menuBar = new JMenuBar(); //create Jmenu object
-        setJMenuBar(menuBar); //set it as main bar for this app
+        JMenuBar menuBar = new JMenuBar();                                              //create Jmenu object
+        setJMenuBar(menuBar);                                                           //set it as main bar for this app
         //make menu list
-        JMenu menu = new JMenu("File"); //create Jmenu (top lv menu e.g home, insert)
-        menu.setMnemonic(KeyEvent.VK_F); //keyboard shortcut for menu (alt-F)
-        menu.getAccessibleContext().setAccessibleDescription("File menu"); //accessability feature
+        JMenu menu = new JMenu("File");                                             //create Jmenu (top lv menu e.g home, insert)
+        menu.setMnemonic(KeyEvent.VK_F);                                               //keyboard shortcut for menu (alt-F)
+        menu.getAccessibleContext().setAccessibleDescription("File menu");          //accessability feature
         menuBar.add(menu);
 
         //MENU ITEMS
@@ -57,7 +57,7 @@ public class NotePad extends JFrame {
         JMenuItem newMenu = new JMenuItem("New", KeyEvent.VK_N);                                    //instantiate new JMenuItem object. indicating shortcut is crlt-n
         newMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));             //set shortcut crlt-n
         newMenu.getAccessibleContext().setAccessibleDescription("Loads a file");                       //text shown whne hover over item
-        newMenu.addActionListener(new ActionListener() {                                                   //create new ActionListener object and within method is overriden (defines what happens to core control action - mouse click occurs) 
+        newMenu.addActionListener(new ActionListener() {                                                  //create new ActionListener object and within method is overriden (defines what happens to core control action - mouse click occurs) 
             public void actionPerformed(ActionEvent e) {
                 //TODO new file method call
             }
