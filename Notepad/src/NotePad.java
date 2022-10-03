@@ -3,7 +3,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.plaf.InsetsUIResource;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.GridBagConstraints;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -55,10 +54,10 @@ public class NotePad extends JFrame {
 
         //MENU ITEMS
         //new menu item
-        JMenuItem newMenu = new JMenuItem("New", KeyEvent.VK_N); //instantiate new JMenuItem object. indicating shortcut is crlt-n
-        newMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK)); //set shortcut crlt-n
-        newMenu.getAccessibleContext().setAccessibleDescription("Loads a file"); //text shown whne hover over item
-        newMenu.addActionListener(new ActionListener() { //create new ActionListener object and within method is overriden (defines what happens to core control action - mouse click occurs) 
+        JMenuItem newMenu = new JMenuItem("New", KeyEvent.VK_N);                                    //instantiate new JMenuItem object. indicating shortcut is crlt-n
+        newMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));             //set shortcut crlt-n
+        newMenu.getAccessibleContext().setAccessibleDescription("Loads a file");                       //text shown whne hover over item
+        newMenu.addActionListener(new ActionListener() {                                                   //create new ActionListener object and within method is overriden (defines what happens to core control action - mouse click occurs) 
             public void actionPerformed(ActionEvent e) {
                 //TODO new file method call
             }
@@ -103,18 +102,55 @@ public class NotePad extends JFrame {
         menu.add(saveAsMenu);
 
         //SET LAYOUT MANAGER
-        setLayout(new GridBagLayout()); //sets app LM to GridBagsLayout
-        GridBagConstrainsts constraints = new GridBagConstrainsts(); //instantiate GridBagCon object. Use to control placemnt of controls within grid.
+        setLayout(new GridBagLayout());                                         //sets app LM to GridBagsLayout
+        GridBagConstraints constraints = new GridBagConstraints();              //instantiate GridBagCon object. Use to control placemnt of controls within grid.
         //set constraints
-        constraints.gridx = 0; //specifiy which column and row the first control will be placed.
+        constraints.gridx = 0;                                                  //specifiy which column and row the first control will be placed.
         constraints.gridy = 0;
-        constraints.weightx = 1; //inform each cell in grid how expand. expand horizontally x but not vertically y
+        constraints.weightx = 1;                                                //inform each cell in grid how expand. expand horizontally x but not vertically y
         constraints.weighty = 0;
-        constraints.fill = GridBagConstrainsts.HORIZONTAL; //inform cell how fill available space. this instance horizonatlly
+        constraints.fill = GridBagConstraints.HORIZONTAL;                       //inform cell how fill available space. this instance horizonatlly
+        //do button row
+        JPanel buttonRow = new JPanel();                                        //creates JPanel instance
+        buttonRow.setLayout(new FlowLayout(FlowLayout.LEFT));                   //sets JPanel to use FlowLayout LM. Set to align left. Any control added to this panel is arranged in row from left.
+        //add button row to JFrame
+        add(buttonRow,constraints);                                             //adds JPanel to UI using constraints object. Placed using objects dictates.
+        
+        //new button
+        JButton btnNew = MakeButton("New File", new ImageIcon("resources/images/NewFile56x56.gif"));    //uses utility method created in btn defaults to create new JButton (pre-sets)
+        btnNew.addActionListener(new ActionListener() {                                                                   //new ActionListener add to button. listen for mouse click.
+            public void actionPerformed(ActionEvent e) {
+                //TODO new file method call
+            }
+        });
+        buttonRow.add(btnNew);
 
+        //load button
+        JButton btnLoad = MakeButton("Load File", new ImageIcon("resources/images/Load56x56.gif"));    
+        btnLoad.addActionListener(new ActionListener() {           
+            public void actionPerformed(ActionEvent e) {
+                //TODO new file method call
+            }
+        });
+        buttonRow.add(btnLoad);
 
+        //save button
+        JButton btnSave = MakeButton("Save File", new ImageIcon("resources/images/Save56x56.gif"));    
+        btnSave.addActionListener(new ActionListener() {                                                 
+            public void actionPerformed(ActionEvent e) {
+                //TODO new file method call
+            }
+        });
+        buttonRow.add(btnSave);
 
-
+        //Save As button
+        JButton btnSaveAs = MakeButton("Save As...", new ImageIcon("resources/images/SaveAs56x56.gif"));
+        btnSaveAs.addActionListener(new ActionListener() {                                                               
+            public void actionPerformed(ActionEvent e) {
+                //TODO new file method call
+            }
+        });
+        buttonRow.add(btnSaveAs);
 
         //draw Jframe (test)
         setVisible(true);
